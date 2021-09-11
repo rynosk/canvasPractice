@@ -9,7 +9,9 @@ class Renderer {
         canvas.height = this.sizes.h;
         this.img = new Image();
         this.img.src = "img01.png";
-        this.rendering();
+        this.img.addEventListener("load", () => {
+            this.rendering();
+        })
     }
     rendering() {
         this.ctx.fillStyle = "green";
