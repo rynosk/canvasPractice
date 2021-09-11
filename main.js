@@ -1,27 +1,27 @@
-class Renderer {
-    constructor(canvas) {
-        this.ctx = canvas.getContext("2d");
-        this.sizes = {
-            "w": document.documentElement.clientWidth,
-            "h": document.documentElement.clientHeight,
-        }
-        canvas.width = this.sizes.w;
-        canvas.height = this.sizes.h;
-        this.img = new Image();
-        this.img.src = "img01.png";
-        this.img.addEventListener("load", () => {
-            this.rendering();
-        })
-    }
-    rendering() {
-        this.ctx.fillStyle = "green";
-        this.ctx.fillRect(0, 0, this.sizes.w, this.sizes.h);
-        this.ctx.drawImage(this.img, 0, 0);
-    }
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
+const size = {
+    "w": document.documentElement.clientWidth,
+    "h": document.documentElement.clientHeight,
 }
 
-const canvas = document.querySelector("canvas");
-new Renderer(canvas);
-window.addEventListener("resize", () => {
-    new Renderer(canvas);
-});
+const img = new Image();
+img.src = "img01.png";
+
+
+function resize() {
+    size.w = document.documentElement.clientWidth;
+    size.h = document.documentElement.clientHeight;
+    rendering();
+}
+
+function rendering() {
+    canvas.width = size.w;
+    canvas.height = size.h;
+    ctx.fillStyle = "blue";
+    ctx.fillRect(0, 0, size.w, size.h);
+    ctx.drawImage(img, 0, 0);
+}
+
+img.addEventListener("load", rendering);
+window.addEventListener("resize", resize);
